@@ -20,7 +20,7 @@ public class Alarms extends Activity {
         actionBar.setIcon(new ColorDrawable(232323));
         actionBar.setDisplayShowHomeEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setTitle("Pill reminders"); //random change//
+        actionBar.setTitle("Pill reminders");
 
     }
 

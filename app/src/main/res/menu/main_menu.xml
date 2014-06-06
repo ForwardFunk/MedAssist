@@ -1,0 +1,14 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.medmobile.pid.medassist.app.MainMenu" >
+
+    <item android:id="@+id/edit_user_data"
+        android:title="Edit user data"
+        android:icon="@drawable/ic_menu_edit_user_data"
+        android:showAsAction="ifRoom" />
+
+    <!--<item android:id="@+id/action_settings"
+        android:title="@string/action_settings"
+        android:orderInCategory="100"
+        android:showAsAction="never" />-->
+</menu>

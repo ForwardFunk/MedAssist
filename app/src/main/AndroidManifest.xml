@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.medmobile.pid.medassist.app" >
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name="com.medmobile.pid.medassist.app.MainMenu"
+            android:label="@string/app_name"
+            android:screenOrientation="sensorPortrait" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.medmobile.pid.medassist.app.Alarms"
+            android:label="@string/title_activity_alarms"
+            android:parentActivityName="com.medmobile.pid.medassist.app.MainMenu"
+            android:screenOrientation="sensorPortrait" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="MainMenu" />
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.medmobile.pid.medassist.app.EditUserInfo"
+            android:label="@string/title_activity_edit_user_info"
+            android:parentActivityName="com.medmobile.pid.medassist.app.MainMenu" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="MainMenu" />
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.medmobile.pid.medassist.app.AlarmSettings"
+            android:label="@string/title_activity_alarm_settings"
+            android:parentActivityName="com.medmobile.pid.medassist.app.MainMenu" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <service
+            android:name="com.medmobile.pid.medassist.app.AlarmService">
+        </service>
+
+        <receiver
+            android:name="com.medmobile.pid.medassist.app.AlarmReceiver"
+            android:enabled="true">
+        </receiver>
+
+        <receiver
+            android:name="com.medmobile.pid.medassist.app.AlarmSetter"
+            android:enabled="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
+        <activity
+            android:name="com.medmobile.pid.medassist.app.AlarmDialog"
+            android:excludeFromRecents="true"
+            android:label="@string/title_activity_alarm_dialog"
+            android:launchMode="singleInstance"
+            android:taskAffinity=""
+            android:theme="@style/AlarmDialogTheme" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+
+    </application>
+
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+
+</manifest>

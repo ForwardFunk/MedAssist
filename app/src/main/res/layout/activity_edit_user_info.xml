@@ -1,0 +1,186 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    tools:context="com.medmobile.pid.medassist.app.Alarms"
+    android:background="@drawable/bgd_activities">
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation = "vertical"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin">
+
+    <RelativeLayout
+        android:id = "@+id/personalInfo"
+        android:layout_width = "match_parent"
+        android:layout_height = "wrap_content"
+        android:layout_marginBottom="5dp">
+
+        <RelativeLayout
+            android:id = "@+id/pi_Headline"
+            android:layout_width = "match_parent"
+            android:layout_height = "wrap_content">
+            <TextView
+                 android:id = "@+id/hl_persInfo"
+                 android:layout_width = "match_parent"
+                 android:layout_height = "wrap_content"
+                 android:text = "Personal Info"
+                 android:textSize = "28sp"
+                 android:textColor="@color/darkRed"/>
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dip"
+                android:background="@color/darkRed"
+                android:layout_below="@+id/hl_persInfo"/>
+        </RelativeLayout>
+        <EditText
+            android:id="@+id/et_name"
+            android:layout_below="@+id/pi_Headline"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Name"
+            android:layout_marginTop = "5dp"/>
+         <EditText
+            android:id="@+id/et_lastname"
+            android:layout_below="@+id/et_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Last name"
+            android:layout_marginTop = "5dp"/>
+         <EditText
+            android:id="@+id/et_dateofbirth"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/et_lastname"
+            android:onClick="onClick"
+            android:focusableInTouchMode="false"
+            android:hint="Date of birth"
+            android:layout_marginTop = "5dp"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id = "@+id/medicalInfo"
+        android:layout_width = "match_parent"
+        android:layout_height = "wrap_content"
+        android:layout_below="@+id/personalInfo">
+
+        <RelativeLayout
+            android:id = "@+id/mi_Headline"
+            android:layout_width = "match_parent"
+            android:layout_height = "wrap_content">
+            <TextView
+                android:id = "@+id/hl_medInfo"
+                android:layout_width = "match_parent"
+                android:layout_height = "wrap_content"
+                android:text = "Medical"
+                android:textSize = "28sp"
+                android:textColor="@color/darkRed"/>
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dip"
+                android:background="@color/darkRed"
+                android:layout_below="@+id/hl_medInfo"/>
+        </RelativeLayout>
+        <EditText
+            android:id="@+id/et_chronicStates"
+            android:layout_below="@+id/mi_Headline"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Chronic States"
+            android:layout_marginTop = "5dp"/>
+        <EditText
+            android:id="@+id/et_allergies"
+            android:layout_below="@+id/et_chronicStates"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Allergies"
+            android:layout_marginTop = "5dp"/>
+        <Spinner
+            android:id="@+id/s_bloodtype"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/et_allergies"
+            android:spinnerMode="dialog"
+            android:prompt="@string/blood_type_prompt" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:id = "@+id/emergencyInfo"
+        android:layout_width = "match_parent"
+        android:layout_height = "wrap_content"
+        android:layout_below="@+id/medicalInfo">
+
+        <RelativeLayout
+            android:id = "@+id/ei_Headline"
+            android:layout_width = "match_parent"
+            android:layout_height = "wrap_content">
+            <TextView
+                android:id = "@+id/hl_emInfo"
+                android:layout_width = "match_parent"
+                android:layout_height = "wrap_content"
+                android:text = "Emergency"
+                android:textSize = "28sp"
+                android:textColor="@color/darkRed"/>
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dip"
+                android:background="@color/darkRed"
+                android:layout_below="@+id/hl_emInfo"/>
+        </RelativeLayout>
+        <EditText
+            android:id="@+id/et_altPhoneNo"
+            android:layout_below="@+id/ei_Headline"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Alternative phone no."
+            android:layout_marginTop = "5dp"
+            android:inputType="phone" />
+        <LinearLayout
+            android:id="@+id/ei_EmergencyContact"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_below="@+id/et_altPhoneNo">
+        <EditText
+            android:id="@+id/et_emContact"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="Emergency contact"
+            android:layout_marginTop = "5dp"
+            android:inputType="phone"/>
+        <ImageButton
+            android:id="@+id/btn_access_contacts"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:background="@drawable/btn_access_contacts"
+            android:onClick = "onClick"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/ei_LocationSharing"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ei_EmergencyContact"
+            android:layout_marginLeft="12dp">
+            <TextView
+                android:id="@+id/ei_tv_LocationSharing"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:text="GPS location sharing via SMS"
+                android:textSize="18sp"
+                android:textColor="#000000"/>
+            <ToggleButton
+                android:id="@+id/ei_tb_LocationSharing"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick = "onClick"/>
+        </LinearLayout>
+    </RelativeLayout>
+
+</RelativeLayout>
+</ScrollView>

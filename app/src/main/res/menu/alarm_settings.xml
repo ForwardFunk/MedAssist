@@ -1,0 +1,15 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.medmobile.pid.medassist.app.AlarmSettings" >
+
+    <item android:id="@+id/menu_save_alarm_changes"
+        android:title="Save changes"
+        android:icon="@drawable/ic_menu_accept_changes"
+        android:showAsAction="always" />
+
+    <item android:id="@+id/menu_delete_alarm"
+        android:title="Delete reminder"
+        android:icon="@drawable/ic_menu_delete_alarm"
+        android:showAsAction="always" />
+</menu>

@@ -1,0 +1,27 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="android:Theme.Holo.Light.DarkActionBar">
+        <item name="android:actionBarStyle">@style/MyActionBar</item>
+      <!-- <item name="android:actionMenuTextAppearance">@style/MyActionBarText</item> -->
+    </style>
+
+    <style name="MyActionBar"
+        parent = "android:Widget.Holo.Light.ActionBar.Solid.Inverse">
+        <item name="android:background">@drawable/action_bar_bg</item>
+    </style>
+
+
+    <style name="AlarmDialogTheme" parent="android:Theme.Holo.Light.Dialog">
+        <item name="android:windowTitleStyle">@style/DialogTitleStyle</item>
+    </style>
+
+    <style name = "DialogTitleStyle"
+        parent = "android:Widget.TextView">
+        <item name="android:textSize">@dimen/text_size_headline_big</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:background">@color/darkRed</item>
+    </style>
+
+
+</resources>

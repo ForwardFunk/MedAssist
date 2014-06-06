@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">MedAssist</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_alarms">Alarms</string>
+    <string name="title_activity_edit_user_info">EditUserInfo</string>
+    <string name="title_activity_alarm_settings">AlarmSettings</string>
+    <string name="blood_type_prompt">Pick your blood type</string>
+
+    <string-array name="blood_types">
+        <item>Blood type - none</item>
+        <item>A +</item>
+        <item>A -</item>
+        <item>B +</item>
+        <item>B -</item>
+        <item>AB +</item>
+        <item>AB -</item>
+        <item>0 +</item>
+        <item>0 -</item>
+    </string-array>
+    <string-array name="syrup_dosage_type">
+        <item>tablespoons (15 ml)</item>
+        <item>teaspoons (8 ml)</item>
+    </string-array>
+
+    <string name="title_activity_alarm_dialog">AlarmDialog</string>
+
+</resources>

@@ -22,6 +22,7 @@ public class AlarmReceiver extends BroadcastReceiver
     int dosageType;
     int currentAmount;
     boolean vibrate;
+    boolean isDoseControlEnabled;
 
     int remainingDoses;
 
@@ -36,11 +37,12 @@ public class AlarmReceiver extends BroadcastReceiver
         dosage = intent.getIntExtra("dosage", 0);
         dosageType = intent.getIntExtra("dosageType", 0);
         currentAmount = intent.getIntExtra("currentAmount", 0);
-        vibrate = Boolean.parseBoolean(intent.getStringExtra("vibrate"));
+        vibrate = intent.getBooleanExtra("vibrate", false);
+        isDoseControlEnabled = intent.getBooleanExtra("isDoseControlEnabled", false);
         int newAmount;
 
 
-        if (isDoseFunctionalityEnabled())
+        if (isDoseControlEnabled)
             newAmount = getNewAmount(medicineType, dosage, dosageType, currentAmount);
         else
             newAmount = currentAmount;
@@ -51,7 +53,7 @@ public class AlarmReceiver extends BroadcastReceiver
         // Update the table of all Alarms (new amount and new next intake time)
         datasource.updateWhenAlarmed(id, newAmount, newNextIntake);
 
-        if (isDoseFunctionalityEnabled())
+        if (isDoseControlEnabled)
         {
             remainingDoses = getRemainingDoses(medicineType, dosage, dosageType, newAmount);
 
@@ -75,9 +77,9 @@ public class AlarmReceiver extends BroadcastReceiver
                 notificationManager.notify(id, notifyBuilder.build());
             }
         }
+
         // Invoke an activity (dialog) with information about the alarm
         // and the medicine that needs to be taken
-
         Intent dialog = new Intent();
         dialog.putExtra("currentTime", currentTime);
         dialog.putExtra("medicineName", medicineName);
@@ -85,6 +87,7 @@ public class AlarmReceiver extends BroadcastReceiver
         dialog.putExtra("vibrate", vibrate);
         dialog.putExtra("dosage", dosage);
         dialog.putExtra("dosageType", dosageType);
+        dialog.putExtra("isDoseControlEnabled", isDoseControlEnabled);
         dialog.setClassName("com.medmobile.pid.medassist.app", "com.medmobile.pid.medassist.app.AlarmDialog");
         dialog.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(dialog);
@@ -114,13 +117,5 @@ public class AlarmReceiver extends BroadcastReceiver
             result = amount - dose;
 
         return result;
-    }
-
-    private boolean isDoseFunctionalityEnabled()
-    {
-        if (dosage == -1 || currentAmount == -1)
-            return false;
-        else
-            return true;
     }
 }

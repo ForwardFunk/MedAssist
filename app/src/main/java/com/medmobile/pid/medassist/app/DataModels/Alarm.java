@@ -17,9 +17,10 @@ public class Alarm {
     private String barcode;
     private boolean vibrate;
     private long nextIntake;
+    private boolean doseControlEnabled;
 
     public Alarm(String medicineName, String medicineType, long startTime, int timesADay,
-                 int dosage, int dosageType, int currentAmount, String barcode, boolean vibrate, long nextIntake) {
+                 int dosage, int dosageType, int currentAmount, String barcode, boolean vibrate, long nextIntake, boolean doseControlEnabled) {
         this.medicineName = medicineName;
         this.medicineType = medicineType;
         this.startTime = startTime;
@@ -30,6 +31,7 @@ public class Alarm {
         this.barcode = barcode;
         this.vibrate = vibrate;
         this.nextIntake = nextIntake;
+        this.doseControlEnabled = doseControlEnabled;
     }
 
     public int getId() {
@@ -118,5 +120,13 @@ public class Alarm {
 
     public void setNextIntake(long nextIntake) {
         this.nextIntake = nextIntake;
+    }
+
+    public boolean isDoseControlEnabled() {
+        return doseControlEnabled;
+    }
+
+    public void setDoseControlEnabled(boolean doseControlEnabled) {
+        this.doseControlEnabled = doseControlEnabled;
     }
 }

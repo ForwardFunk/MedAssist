@@ -12,80 +12,22 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:orientation="vertical">
-        <RelativeLayout
-            android:id="@+id/rs_medicineType"
-            android:layout_height="wrap_content"
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dip"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:background="@color/darkRed"/>
+
+        <EditText
+            android:id="@+id/et_rs_medicineName"
             android:layout_width="match_parent"
-            android:layout_centerVertical="true">
-            <RelativeLayout
-                android:id = "@+id/rs_Headline"
-                android:layout_width = "match_parent"
-                android:layout_height = "wrap_content"
-                android:layout_marginTop="@dimen/activity_vertical_margin">
-                <TextView
-                    android:id = "@+id/hl_medicineType"
-                    android:layout_width = "match_parent"
-                    android:layout_height = "wrap_content"
-                    android:text = "Pick your medicine type *"
-                    android:textSize = "@dimen/text_size_headline"
-                    android:textColor="@color/darkRed"/>
-                <View
-                    android:layout_width="fill_parent"
-                    android:layout_height="1dip"
-                    android:background="@color/darkRed"
-                    android:layout_below="@+id/hl_medicineType"/>
-            </RelativeLayout>
-            <LinearLayout
-                android:id="@+id/rs_medicineTypeSelector"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/rs_Headline"
-                android:layout_marginTop="@dimen/activity_vertical_margin"
-                android:layout_centerInParent="true">
-
-                <ImageButton
-                    android:id="@+id/ib_syrupTypeSelector"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:onClick = "onMedSelectorClick"
-                    android:background="@drawable/selbtn_syrup"/>
-                <ImageButton
-                    android:id="@+id/ib_capsuleTypeSelector"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:onClick = "onMedSelectorClick"
-                    android:background="@drawable/selbtn_capsule"/>
-                <ImageButton
-                    android:id="@+id/ib_syringeTypeSelector"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:onClick = "onMedSelectorClick"
-                    android:background="@drawable/selbtn_syringe"/>
-
-            </LinearLayout>
-        </RelativeLayout>
-        <LinearLayout
-            android:id="@+id/rs_medicineName"
             android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:layout_below="@+id/rs_medicineType"
-            android:orientation="vertical">
-            <EditText
-                android:id="@+id/et_rs_medicineName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Medicine name *"
-                android:textSize="22sp"
-                android:textColor="@color/darkBrown"
-                android:layout_marginTop="@dimen/activity_vertical_margin_small"/>
-            <View
-                android:layout_width="fill_parent"
-                android:layout_height="1dip"
-                android:background="@color/darkRed"
-                android:layout_below="@+id/et_rs_medicineName"
-                android:layout_marginTop="@dimen/activity_vertical_margin_small"/>
+            android:hint="Medicine name *"
+            android:textSize="22sp"
+            android:textColor="@color/darkBrown"
+            android:layout_marginTop="@dimen/activity_vertical_margin_small"/>
 
-        </LinearLayout>
 
         <!-- time of first intake, and times of taking per day -->
         <LinearLayout
@@ -142,7 +84,66 @@
                     android:text=" times per day *"
                     android:layout_centerVertical="true"
                     android:layout_alignParentEnd="true"/>
+
             </RelativeLayout>
+
+        </LinearLayout>
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dip"
+            android:background="@color/darkRed"
+            android:layout_marginTop="@dimen/activity_vertical_margin_small"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:id="@+id/rs_medicineTypeSelector"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/activity_vertical_margin_small">
+
+                <ImageButton
+                    android:id="@+id/ib_syrupTypeSelector"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick = "onMedSelectorClick"
+                    android:background="@drawable/selbtn_syrup"/>
+                <ImageButton
+                    android:id="@+id/ib_capsuleTypeSelector"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/ib_syrupTypeSelector"
+                    android:onClick = "onMedSelectorClick"
+                    android:background="@drawable/selbtn_capsule"/>
+                <ImageButton
+                    android:id="@+id/ib_syringeTypeSelector"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/ib_capsuleTypeSelector"
+                    android:onClick = "onMedSelectorClick"
+                    android:background="@drawable/selbtn_syringe"/>
+                <TextView
+                    android:id="@+id/tv_rs_medicineTypeSelector"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/textView_margin_left"
+                    android:layout_below="@+id/ib_syrupTypeSelector"
+                    android:layout_centerInParent="true"
+                    android:text="I'm taking a: *"
+                    android:textColor="@color/darkBrown"/>
+            </RelativeLayout>
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/darkRed"/>
+            <CheckBox
+                android:id="@+id/cb_doseControl"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Dose control enabled"
+                android:onClick="onClick"/>
         </LinearLayout>
 
         <!-- amount included in each dose, and dosage type -->
@@ -150,7 +151,11 @@
             android:id="@+id/rs_dosage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dip"
+                android:background="@color/darkRed"
+                android:layout_marginBottom="@dimen/activity_vertical_margin_small"/>
             <EditText
                 android:id="@+id/et_number_rs_dosage"
                 android:layout_width="wrap_content"
@@ -166,7 +171,7 @@
                 android:layout_marginLeft="@dimen/activity_horizontal_margin"
                 android:layout_toRightOf="@+id/et_number_rs_dosage"
                 android:layout_centerVertical="true"
-                android:text="pills per dose"/>
+                android:text="pills per dose *"/>
             <TextView
                 android:id="@+id/tv_ampoules_rs_dosage"
                 android:layout_width="wrap_content"
@@ -174,7 +179,7 @@
                 android:layout_marginLeft="@dimen/activity_horizontal_margin"
                 android:layout_toRightOf="@+id/et_number_rs_dosage"
                 android:layout_centerVertical="true"
-                android:text="ampoules per dose"/>
+                android:text="ampoules per dose *"/>
             <Spinner
                 android:id="@+id/s_syrup_rs_dosage"
                 android:layout_width="match_parent"
@@ -211,7 +216,7 @@
                 android:layout_marginLeft="@dimen/activity_horizontal_margin"
                 android:layout_toRightOf="@+id/et_currAmount_rs_startingDose"
                 android:layout_centerVertical="true"
-                android:text="pills"/>
+                android:text="pills *"/>
             <TextView
                 android:id="@+id/tv_ampoules_rs_startingDose"
                 android:layout_width="wrap_content"
@@ -219,7 +224,7 @@
                 android:layout_marginLeft="@dimen/activity_horizontal_margin"
                 android:layout_toRightOf="@+id/et_currAmount_rs_startingDose"
                 android:layout_centerVertical="true"
-                android:text="ampoules"/>
+                android:text="ampoules *"/>
             <TextView
                 android:id="@+id/tv_syrup_rs_startingDose"
                 android:layout_width="wrap_content"
@@ -227,7 +232,7 @@
                 android:layout_marginLeft="@dimen/activity_horizontal_margin"
                 android:layout_toRightOf="@+id/et_currAmount_rs_startingDose"
                 android:layout_centerVertical="true"
-                android:text="millilitres"/>
+                android:text="millilitres *"/>
 
         </RelativeLayout>
         <RelativeLayout
@@ -295,7 +300,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"/>
+                    android:layout_centerVertical="true"
+                    android:checked="true"/>
             </RelativeLayout>
 
         </RelativeLayout>

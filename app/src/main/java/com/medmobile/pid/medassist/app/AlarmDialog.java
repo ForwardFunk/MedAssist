@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.TextView;
+import android.widget.ViewFlipper;
 
 import java.util.Calendar;
 
@@ -26,21 +27,22 @@ public class AlarmDialog extends Activity implements View.OnClickListener
     private static final int TEN_MINS_IN_MILLIS = 10*60*1000; // 10 mins by 60 secs by 1000 millisecs
 
     // Alarm attributes sent using putExtra(tag, content) by the calling broadcast receiver
-    String medicineName;
-    long currentTime;
-    String medicineType;
-    boolean vibrate;
-    int dosage;
-    int dosageType;
+    private String medicineName;
+    private long currentTime;
+    private String medicineType;
+    private boolean vibrate;
+    private int dosage;
+    private int dosageType;
+    private boolean isDoseControlEnabled;
 
     // Views used in the dialog to display data
-    TextView tv_dosage;
-    TextView tv_dosageType;
-    TextView tv_time;
+    private TextView tv_dosage;
+    private TextView tv_dosageType;
+    private TextView tv_time;
 
     //MediaPlayer (for ringtone) and vibrator objects
-    MediaPlayer player;
-    Vibrator vibrator;
+    private MediaPlayer player;
+    private Vibrator vibrator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -61,6 +63,7 @@ public class AlarmDialog extends Activity implements View.OnClickListener
         vibrate = intent.getBooleanExtra("vibrate", false);
         dosage = intent.getIntExtra("dosage", 0);
         dosageType = intent.getIntExtra("dosageType", 0);
+        isDoseControlEnabled = intent.getBooleanExtra("isDoseControlEnabled", false);
 
         // Register the data-displaying TextViews for use in Java
         tv_dosage = (TextView) findViewById(R.id.tv_dosage_msg_ad_main);
@@ -72,6 +75,12 @@ public class AlarmDialog extends Activity implements View.OnClickListener
         tv_time.setTypeface(zwodrei);
         tv_dosage.setTypeface(null, Typeface.BOLD);
         tv_dosageType.setTypeface(null, Typeface.BOLD);
+
+        // ViewFlipper used to switch between DoseControl and NonDoseControl views
+        ViewFlipper viewFlipper = (ViewFlipper) findViewById(R.id.viewFlipper_dialog);
+
+        if (!isDoseControlEnabled)
+            viewFlipper.showNext();
 
         playRingtoneAndVibrate();
 
@@ -173,17 +182,18 @@ public class AlarmDialog extends Activity implements View.OnClickListener
 
     private void setDosageAndType()
     {
-        tv_dosage.setText(dosage);
-
-        if (medicineType.equals("syrup"))
+        if (isDoseControlEnabled)
         {
-            if (dosageType == 8)
-                tv_dosageType.setText("teaspoons");
-            else if (dosageType == 15)
-                tv_dosageType.setText("tablespoons");
-        }
-        else
-            tv_dosageType.setText(dosageType);
+            tv_dosage.setText(String.valueOf(dosage));
 
+
+            if (medicineType.equals("syrup")) {
+                if (dosageType == 8)
+                    tv_dosageType.setText("teaspoons");
+                else if (dosageType == 15)
+                    tv_dosageType.setText("tablespoons");
+            } else
+                tv_dosageType.setText(dosageType);
+        }
     }
 }

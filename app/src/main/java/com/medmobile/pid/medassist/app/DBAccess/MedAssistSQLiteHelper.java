@@ -26,6 +26,7 @@ public class MedAssistSQLiteHelper extends SQLiteOpenHelper {
     public static final String COL_BARCODE = "Barcode";
     public static final String COL_VIBRATE = "Vibrate";
     public static final String COL_NEXT_INTAKE = "NextIntake";
+    public static final String COL_DOSE_CONTROL_ENABLED = "DoseControlEnabled";
 
     /* Table and column info for USER table */
     public static final String TABLE_USER = "USER";
@@ -43,7 +44,7 @@ public class MedAssistSQLiteHelper extends SQLiteOpenHelper {
 
     /* Database info */
     private static final String DATABASE_NAME = "medassist.db";
-    private static final int DATABASE_VERSION = 7;
+    private static final int DATABASE_VERSION = 8;
 
     //SQL statement for ALARMS table creation
     private static final String TABLE_ALARMS_CREATE =
@@ -58,7 +59,8 @@ public class MedAssistSQLiteHelper extends SQLiteOpenHelper {
             + COL_CURRENT_AMOUNT + " integer, "
             + COL_BARCODE  +  " text, "
             + COL_VIBRATE + " text, "
-            + COL_NEXT_INTAKE + " integer);";
+            + COL_NEXT_INTAKE + " integer, "
+            + COL_DOSE_CONTROL_ENABLED + "text);";
 
     //SQL statement for USER table creation
     private static final String TABLE_USER_CREATE =

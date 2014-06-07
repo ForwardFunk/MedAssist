@@ -62,6 +62,7 @@ public class AlarmService extends IntentService
         intent.putExtra("dosageType", alarmToSet.getDosageType());
         intent.putExtra("currentAmount", alarmToSet.getCurrentAmount());
         intent.putExtra("vibrate", alarmToSet.isVibrate());
+        intent.putExtra("isDoseControlEnabled", alarmToSet.isDoseControlEnabled());
 
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 

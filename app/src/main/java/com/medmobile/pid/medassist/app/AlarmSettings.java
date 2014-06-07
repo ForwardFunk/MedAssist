@@ -6,6 +6,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.InputFilter;
@@ -14,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
@@ -62,6 +64,8 @@ public class AlarmSettings extends Activity implements View.OnClickListener {
     private TextView tv_barcodeStatus;
 
     private ToggleButton tb_vibrate;
+
+    private CheckBox cb_doseControl;
 
     private Alarm retrievedAlarm, databaseAlarm;
     private AlarmsDataSource datasource;
@@ -125,16 +129,19 @@ public class AlarmSettings extends Activity implements View.OnClickListener {
         // ToggleButton for turning vibration on/off
         tb_vibrate = (ToggleButton) findViewById(R.id.tb_vibrate_rs_additionalFeatures);
 
+        // Checkbox for enabling/disabling dose control feature
+        cb_doseControl = (CheckBox) findViewById(R.id.cb_doseControl);
+
+
+        disableDosageViews();
+
         // Set medtype-dependant views' visibility to false
-        et_numPerDosage.setVisibility(View.GONE);
-        et_currentAmount.setVisibility(View.GONE);
-        tv_pills_dose.setVisibility(View.GONE);
-        tv_ampoules_dose.setVisibility(View.GONE);
-        s_syrup_dose.setVisibility(View.GONE);
-        tv_pills_amount.setVisibility(View.GONE);
-        tv_ampoules_amount.setVisibility(View.GONE);
-        tv_syrup_amount.setVisibility(View.GONE);
-        tv_currAmount.setVisibility(View.GONE);
+        tv_pills_dose.setVisibility(View.INVISIBLE);
+        tv_ampoules_dose.setVisibility(View.INVISIBLE);
+        s_syrup_dose.setVisibility(View.INVISIBLE);
+        tv_pills_amount.setVisibility(View.INVISIBLE);
+        tv_ampoules_amount.setVisibility(View.INVISIBLE);
+        tv_syrup_amount.setVisibility(View.INVISIBLE);
 
         // Set-up the datasource for DB access and open it
         datasource = new AlarmsDataSource(this);
@@ -181,7 +188,7 @@ public class AlarmSettings extends Activity implements View.OnClickListener {
         switch(id)
         {
             case R.id.menu_save_alarm_changes:
-                if (!isRequiredChecked())
+                if (!areRequiredFieldsEntered())
                     showDialog(OBLIGATORY_NOT_FILLED_DIALOG);
                 else
                     saveAlarmInfo();
@@ -202,7 +209,15 @@ public class AlarmSettings extends Activity implements View.OnClickListener {
                 showDialog(TIME_PICKER_DIALOG);
                 break;
             case R.id.ib_barcode_rs_barcodeScanner:
+
                 //do barcode scanning;
+
+                break;
+            case R.id.cb_doseControl:
+                if (cb_doseControl.isChecked())
+                    enableDosageViews();
+                else
+                    disableDosageViews();
                 break;
         }
     }
@@ -306,7 +321,33 @@ public class AlarmSettings extends Activity implements View.OnClickListener {
 
     }
 
-    private boolean isRequiredChecked()
+    private void enableDosageViews()
+    {
+        et_numPerDosage.setEnabled(true);
+        et_currentAmount.setEnabled(true);
+        tv_pills_dose.setTextColor(Color.BLACK);
+        tv_ampoules_dose.setTextColor(Color.BLACK);
+        s_syrup_dose.setEnabled(true);
+        tv_pills_amount.setTextColor(Color.BLACK);
+        tv_ampoules_amount.setTextColor(Color.BLACK);
+        tv_syrup_amount.setTextColor(Color.BLACK);
+        tv_currAmount.setTextColor(Color.BLACK);
+    }
+
+    private void disableDosageViews()
+    {
+        et_numPerDosage.setEnabled(false);
+        et_currentAmount.setEnabled(false);
+        tv_pills_dose.setTextColor(getResources().getColor(R.color.hintGrey));
+        tv_ampoules_dose.setTextColor(getResources().getColor(R.color.hintGrey));
+        s_syrup_dose.setEnabled(false);
+        tv_pills_amount.setTextColor(getResources().getColor(R.color.hintGrey));
+        tv_ampoules_amount.setTextColor(getResources().getColor(R.color.hintGrey));
+        tv_syrup_amount.setTextColor(getResources().getColor(R.color.hintGrey));
+        tv_currAmount.setTextColor(getResources().getColor(R.color.hintGrey));
+    }
+
+    private boolean areRequiredFieldsEntered()
     {
         boolean result = true;
 
@@ -317,6 +358,11 @@ public class AlarmSettings extends Activity implements View.OnClickListener {
         // If medicine type isn't selected
         if(!ib_capsule.isSelected() && !ib_syringe.isSelected() && !ib_syrup.isSelected())
             result = false;
+
+        // If dosage control is enabled, then check if the necessary fields for it are entered
+        if (cb_doseControl.isChecked())
+            if (et_numPerDosage.getText().toString().matches("") || et_currentAmount.getText().toString().matches("") )
+                result = false;
 
         return result;
     }
@@ -331,6 +377,7 @@ public class AlarmSettings extends Activity implements View.OnClickListener {
         int dosageType = 0;
         int currentAmount = et_currentAmount.getText().toString().equals("") ? -1 : Integer.parseInt(et_currentAmount.getText().toString());
         boolean vibrate = tb_vibrate.isChecked();
+        boolean isDoseControlEnabled = cb_doseControl.isChecked();
 
         if (ib_syrup.isSelected())
         {
@@ -341,7 +388,7 @@ public class AlarmSettings extends Activity implements View.OnClickListener {
         }
 
 
-        return new Alarm(medicineName, medicineType, startTime, timesADay, dosage, dosageType, currentAmount, barcodeResult, vibrate, startTime);
+        return new Alarm(medicineName, medicineType, startTime, timesADay, dosage, dosageType, currentAmount, barcodeResult, vibrate, startTime, isDoseControlEnabled);
 
     }
 

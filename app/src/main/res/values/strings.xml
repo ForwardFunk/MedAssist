@@ -21,8 +21,8 @@
         <item>0 -</item>
     </string-array>
     <string-array name="syrup_dosage_type">
-        <item>tablespoons (15 ml)</item>
-        <item>teaspoons (8 ml)</item>
+        <item>tablespoons (15 ml) per dose *</item>
+        <item>teaspoons (8 ml) per dose *</item>
     </string-array>
 
     <string name="title_activity_alarm_dialog">AlarmDialog</string>

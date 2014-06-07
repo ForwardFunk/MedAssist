@@ -30,7 +30,8 @@ public class AlarmsDataSource {
             MedAssistSQLiteHelper.COL_CURRENT_AMOUNT,
             MedAssistSQLiteHelper.COL_BARCODE,
             MedAssistSQLiteHelper.COL_VIBRATE,
-            MedAssistSQLiteHelper.COL_NEXT_INTAKE};
+            MedAssistSQLiteHelper.COL_NEXT_INTAKE,
+            MedAssistSQLiteHelper.COL_DOSE_CONTROL_ENABLED};
 
     public AlarmsDataSource(Context context)
     {
@@ -62,6 +63,7 @@ public class AlarmsDataSource {
         values.put(MedAssistSQLiteHelper.COL_BARCODE, alarm.getBarcode());
         values.put(MedAssistSQLiteHelper.COL_VIBRATE, String.valueOf(alarm.isVibrate()));
         values.put(MedAssistSQLiteHelper.COL_NEXT_INTAKE, alarm.getNextIntake());
+        values.put(MedAssistSQLiteHelper.COL_DOSE_CONTROL_ENABLED, String.valueOf(alarm.isDoseControlEnabled()));
 
         long insertId = database.insert(MedAssistSQLiteHelper.TABLE_ALARMS, null, values);
         Cursor cursor = database.query(MedAssistSQLiteHelper.TABLE_ALARMS, allColumns, MedAssistSQLiteHelper.COL_ID + " = " + insertId,
@@ -105,7 +107,7 @@ public class AlarmsDataSource {
     private Alarm cursorToAlarm(Cursor cursor)
     {
         Alarm alarm = new Alarm(cursor.getString(1), cursor.getString(2), cursor.getLong(3), cursor.getInt(4), cursor.getInt(5),
-                cursor.getInt(6), cursor.getInt(7), cursor.getString(8), Boolean.parseBoolean(cursor.getString(9)), cursor.getLong(10));
+                cursor.getInt(6), cursor.getInt(7), cursor.getString(8), Boolean.parseBoolean(cursor.getString(9)), cursor.getLong(10), Boolean.parseBoolean(cursor.getString(11)));
 
         alarm.setId(cursor.getInt(0));
         return alarm;
